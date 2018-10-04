@@ -1,6 +1,7 @@
 # coding: utf-8
+import csv
 
-n = 4
+n = 16
 size = 2 ** n 
 
 def getbintoint(integer, size):
@@ -22,10 +23,12 @@ def onestep(line):
   return newline
 
 def main():
-  binnum = getbintoint(1, size)
-  for i in range((2 ** (n + 1)) - 2):
-    print(i, int(binnum, 2))
-    binnum = onestep(binnum)
+  with open('data.csv', 'w') as f:
+    writer = csv.writer(f, lineterminator='\n')
+    binnum = getbintoint(1, size)
+    for i in range((2 ** (n + 1)) - 2):
+      writer.writerow((i+1, int(binnum, 2)))
+      binnum = onestep(binnum)
 
 if __name__ == '__main__':
   main()
